@@ -19,34 +19,64 @@ class ArticleController extends Controller
 
     public  function indexAction()
     {
-       //On récupére l'url de base de l'API Rest (à changer selon votre installation de l'API sur serveur)
-       $base_uri = $this->container->getParameter('base_uri');
-       $url_articles = $base_uri."articles";
-       try
-       {
-           $client = new Client();
+        //On récupére l'url de base de l'API Rest (à changer selon votre installation de l'API sur serveur)
+        $base_uri = $this->container->getParameter('base_uri');
+        $url_articles = $base_uri . "articles";
+        try {
+            $client = new Client();
 
-           $response = $client->get($url_articles,null);
-           $articles = \GuzzleHttp\json_decode($response->getBody()->getContents());
+            $response = $client->get($url_articles, null);
+            $articles = \GuzzleHttp\json_decode($response->getBody()->getContents());
 
-           return $this->render('home.twig', [
+            return $this->render('home.twig', [
 
-               'articles' => $articles
+                'articles' => $articles
 
-           ]);
-       }
-       catch (RequestException $e)
-       {
-          $response = $e->getMessage();
+            ]);
+        } catch (RequestException $e) {
+            $response = $e->getMessage();
 
-          return $response;
+            return $response;
 
-       }
+        }
+    }
 
+    /**
+     * @Route('article/{slug}', name="article")
+     */
 
+    public function getArticleAction($slug)
+    {
+        //On récupére l'url de base de l'API Rest (à changer selon votre installation de l'API sur serveur)
+        $base_uri = $this->container->getParameter('base_uri');
+        $url_article = $base_uri . "articles/".$slug;
 
+        try
+        {
+            $client = new Client();
+
+            $response = $client->get($url_article, null);
+            $article  = \GuzzleHttp\json_decode($response->getBody()->getContents());
+
+            return $this->render('home.twig', [
+
+                'articles' => $article
+
+            ]);
+        }
+        catch (RequestException $e)
+        {
+            $response = $e->getMessage();
+
+            return $response;
+        }
 
     }
+
+
+
+
+
 
 
 
