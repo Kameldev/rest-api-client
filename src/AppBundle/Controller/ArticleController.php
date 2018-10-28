@@ -42,7 +42,8 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route('article/{slug}', name="article")
+     * @Route("article/{slug}", name="article")
+     * @Method("GET")
      */
 
     public function getArticleAction($slug)
@@ -58,9 +59,9 @@ class ArticleController extends Controller
             $response = $client->get($url_article, null);
             $article  = \GuzzleHttp\json_decode($response->getBody()->getContents());
 
-            return $this->render('home.twig', [
+            return $this->render('article/article.twig', [
 
-                'articles' => $article
+                'article' => $article
 
             ]);
         }
@@ -71,6 +72,13 @@ class ArticleController extends Controller
             return $response;
         }
 
+    }
+
+
+    public function showArticleAction()
+    {
+
+        return $this->render('article/add_article.twig');
     }
 
 

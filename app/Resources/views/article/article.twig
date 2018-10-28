@@ -3,47 +3,39 @@
 {% block content %}
 
 
-<h1>Prestations</h1>
+<h1>Article</h1>
 
 
     <div class="card horizontal">
 
          <div class="card-image">
-            <img class="responsive-img" style="max-height:300px;" src="{{ uploaddir ~ prestation.nom_image }}">
+
          </div>
 
          <div class="card-stacked">
             <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">{{ prestation.nom }}</span>
-                <p class="valign">{{ prestation.description }}</p>
-                <br> <br> <br>
-                <select class="ui dropdown col s12" name="categorie" id="categorie">
-                    <option disabled selected>Choisir une catégorie</option>
-                    {% for cat in categories %}
-                        <option
-                                {% if prestation.categorie_id == cat.id %}
-                                    selected
-                                {% endif %}
-                                value="{{ cat.id }}">{{cat.nom}}</option>
-                    {% endfor %}
-                </select>
-                 <br> <br> <br>
+                <span class="card-title activator grey-text text-darken-4">{{ article.titre }} [Par {{ article.created_by }} Le {{ article.created_at | date("d/m/Y") }}]</span>
+                <p class="valign">{{ article.slug }}</p>
+                <br>
+                <p>{{ article.accroche }}</p>
                 <div class="ui left action input">
-                    <button class="ui teal labeled icon button">
-                        <i class="cart icon"></i>
-                        Ajouter au Panier
-                    </button>
-                    <input value="{{ prestation.prix }} €" type="text">
+
+                    <p>{{ article.corps }}</p>
+                </div>
+                <div class="ui left  input">
+                    <p>{{ article.corps }}</p>
                 </div>
              </div>
 
             <div class="card-action">
-              <strong> Dernière Mise à Jour : </strong> {{ prestation.updated_at }}
+              <strong> Dernière Mise à Jour : </strong> {{ article.created_at }}
             </div>
 
         </div> 
     </div>
-
+    <a class="btn waves-effect waves-light left" href="{{ path('articles.index') }}">Retour Liste
+        <i class="material-icons left">send</i>
+    </a>
 
  
 
