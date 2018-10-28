@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
+use Symfony\Component\HttpFoundation\Request as re;
 
 class ArticleController extends Controller
 {
@@ -74,6 +75,10 @@ class ArticleController extends Controller
 
     }
 
+    /**
+     * @Route("creer/",name="article.show")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
 
     public function showArticleAction()
     {
@@ -81,7 +86,50 @@ class ArticleController extends Controller
         return $this->render('article/add_article.twig');
     }
 
+    /**
+     * @Route("articles/", name="article.add")
+     * @Method("POST")
+     */
+   public function addArticleAction(re $request)
+   {
 
+       //On récupére l'url de base de l'API Rest (à changer selon votre installation de l'API sur serveur)
+       $base_uri = $this->container->getParameter('base_uri');
+       $url_article_add = $base_uri."articles";
+       $params = $request->request->all();
+
+       $slug = str_replace(' ','-', $params['titre']);
+       $slug = strtolower($slug);
+
+       try
+       {
+           $client = new Client();
+
+           $response = $client->request('POST',$url_article_add, [
+               'headers' => ['Content-Type' => 'application/json'],
+               'body'   => \GuzzleHttp\json_encode([
+                   'titre' => $params['titre'],
+                   'accroche' => $params['accroche'],
+                   'corps' => $params['corps'],
+                   'slug' => $slug,
+                   'created_by' => $params['autheur'],
+
+               ])
+
+           ]);
+        if($response->getStatusCode() == "201")
+        {
+            return $this->redirectToRoute('articles.index');
+        }
+
+       }
+       catch (RequestException $e)
+       {
+           $response = $e->getMessage();
+
+           return $response;
+       }
+   }
 
 
 
