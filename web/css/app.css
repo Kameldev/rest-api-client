@@ -1,0 +1,16 @@
+
+.espace {
+    width: 5px;
+    padding: 5px;
+    display: inline-block;
+}
+
+.espace-vertical {
+    display: block;
+    padding: 20px;
+}
+
+.card{
+    clear: both;
+}
+
