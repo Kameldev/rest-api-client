@@ -13,9 +13,9 @@ $ composer install
 
 ### 3. Udapt BASE URI  (IMPORTANT)
 
-Adapt  "paramaters"  to correspond to your API REST URI
+Adapt  "paramaters"  to correspond to your API REST URI, in : 
 
-app/config/services.yml 
+     app/config/services.yml 
 
 ### 4. Run server (client API second)
 ``` bash
