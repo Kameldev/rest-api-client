@@ -1,5 +1,15 @@
-Symfony Standard Edition
+CLIENT REST API 
 ========================
+> DISPLAY ARTICLE FROM API REST
+## Installation
+### 1. Clone repository
+``` bash
+$ git clone https://github.com/Kameldev/rest-api-client.git
+```
+### 2. Install dependencies
+``` bash
+$ composer install
+```
 
 **WARNING**: This distribution does not support Symfony 4. See the
 [Installing & Setting up the Symfony Framework][15] page to find a replacement
