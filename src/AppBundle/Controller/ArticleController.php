@@ -132,7 +132,7 @@ class ArticleController extends Controller
    }
 
     /**
-     * @Route("supprimer/{id}, name="article.delete")
+     * @Route("supprimer/{id}", name="article.delete")
      * @Method("POST")
      * @param $id
      */
