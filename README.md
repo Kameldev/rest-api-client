@@ -11,6 +11,15 @@ $ git clone https://github.com/Kameldev/rest-api-client.git
 $ composer install
 ```
 
+### 3. Udap BASE URI 
+Adapt the base_uri to correspond to your API REST URI
+
+app/config/services.yml 
+
+### 4. Run server (client API second)
+``` bash
+$ php bin/console server:run 
+```
 **WARNING**: This distribution does not support Symfony 4. See the
 [Installing & Setting up the Symfony Framework][15] page to find a replacement
 that fits you best.
