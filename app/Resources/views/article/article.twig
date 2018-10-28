@@ -36,7 +36,12 @@
     <a class="btn waves-effect waves-light left" href="{{ path('articles.index') }}">Retour Liste
         <i class="material-icons left">send</i>
     </a>
+    <form action="{{ path('article.delete',{'id':article.id}) }}" method="POST">
+        <button class="btn waves-effect waves-light right" type="submit" >Supprimer
 
+            <i class="material-icons left">send</i>
+        </button>
+    </form>
  
 
 

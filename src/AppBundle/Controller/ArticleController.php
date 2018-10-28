@@ -131,7 +131,41 @@ class ArticleController extends Controller
        }
    }
 
+    /**
+     * @Route("supprimer/{id}, name="article.delete")
+     * @Method("POST")
+     * @param $id
+     */
 
+public  function supprimerArticleAction($id)
+{
+    $base_uri           = $this->container->getParameter('base_uri');
+    $url_article_delete = $base_uri."articles";
+
+    try
+    {
+        $client = new Client();
+
+       $url = $url_article_delete."/$id";
+
+       $headers = array('Connection' => 'close', 'User-Agent' => 'PHPPlivo');
+       $response = $client->delete($url,$headers);
+
+       if($response->getStatusCode() == "204")
+       {
+           return $this->redirectToRoute('articles.index');
+
+       }
+    }
+    catch (RequestException $e)
+    {
+        $response = $e->getMessage();
+
+        return $response;
+    }
+
+
+}
 
 
 
